@@ -1,0 +1,71 @@
+import java.util.*;
+class Solution{
+	
+    static boolean checkBalance(String theString)
+    {
+        Stack<Character> theStack = new Stack<Character>();
+
+        boolean theAnswer = true;
+
+        for (int i = 0; i < theString.length(); i++)
+        {
+            char theChar = theString.charAt(i);
+
+            if (theChar == '(' || theChar == '{' || theChar == '[')
+            {
+                theStack.push(theChar);
+            }
+            else
+            {
+                switch(theChar)
+                {
+                    case ')':
+                        if (theStack.isEmpty() || theStack.pop() != '(')
+                        {
+                            theAnswer = false;
+                        }
+                        break;
+                    case '}':
+                        if (theStack.isEmpty() || theStack.pop() != '{')
+                        {
+                            theAnswer = false;
+                        }
+                        break;
+                    case ']':
+                        if (theStack.isEmpty() || theStack.pop() != '[')
+                        {
+                            theAnswer = false;
+                        }
+                        break;
+                    default:
+                        theAnswer = false;
+                        break;
+                }
+            }
+        }
+        if (!theStack.isEmpty())
+        {
+            theAnswer = false;
+        }
+        return theAnswer;
+    }
+
+	public static void main(String []argh)
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		while (sc.hasNext()) {
+			String input=sc.next();
+            if (checkBalance(input))
+            {
+                System.out.println("true");
+            }
+            else if (!checkBalance(input))
+            {
+                System.out.println("false");
+            }
+		}
+
+		
+	}
+}
